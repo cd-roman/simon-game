@@ -11,6 +11,8 @@ var sounds = {
     blue: new Audio("sounds/blue.mp3")
 };
 
+var wrongSound = new Audio("sounds/wrong.mp3");
+
 var level = 0;
 
 var started = false;
@@ -130,7 +132,6 @@ function checkAnswer(index) {
 
     if (userClickedPattern[index] !== gamePattern[index]) {
         $("h1").text("Game Over, Press Any Key to Restart");
-        var wrongSound = new Audio("sounds/wrong.mp3");
         wrongSound.play();
 
         $("body").addClass("game-over");
