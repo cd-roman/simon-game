@@ -7,16 +7,21 @@ h1 {
   line-height: 1.3;
 }
 
+h2 {
+  line-height: 1.2;
+}
+
 #toggleAudio {
   font-size: x-large;
   margin-left: auto;
   margin-right: 8%;
   text-align: center;
   width: 50px;
+  cursor: pointer;
 }
 
 #level-title {
-  font-family: 'Press Start 2P', cursive;
+  font-family: 'Press Start 2P', monospace;
   font-size: 3rem;
   margin:  3% 5% 2% 5%;
   color: #FEF2BF;
@@ -35,6 +40,7 @@ h1 {
   width: 200px;
   border: 10px solid black;
   border-radius: 20%;
+  cursor: pointer;
 }
 
 .game-over {
@@ -61,4 +67,60 @@ h1 {
 .pressed {
   box-shadow: 0 0 20px white;
   background-color: grey;
+}
+
+#showRules {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 600;
+  font-size: 1.2rem;
+  cursor: pointer;
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 5px 20px;
+  margin-top: 70px;
+  margin-bottom: 50px;
+}
+
+#closeRules {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 600;
+  font-size: 1.2rem;
+  cursor: pointer;
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 5px 20px;
+  margin-top: 20px;
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 1000;
+}
+
+.overlay-content {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #f5f5f5;
+  padding: 40px;
+  width: 80%;
+  max-width: 500px;
+  text-align: center;
+  font-family: 'Press Start 2P', monospace;
+  border-radius: 10px;
+}
+
+.rules-description {
+  font-size: 1.2rem;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 400;
+  margin-bottom: 20px;
+  text-align: left;
 }

@@ -104,6 +104,11 @@ function updateAndPlayAudio() {
     if ($("#toggleAudio").text() === "🔉") {
         audioElement.play();
     }
+    // Add event listener for 'ended' event to play the audio again from the beginning
+    audioElement.addEventListener("ended", function() {
+        audioElement.currentTime = 0;
+        audioElement.play();
+    });
 };
 
 $(document).one("keydown", function(event) {
@@ -174,4 +179,12 @@ $('div[type="button"]').on("click", function(e){
         animatePress(notInGameChosenColor);
         playSound(notInGameChosenColor);
     }
+});
+
+document.getElementById('showRules').addEventListener('click', function() {
+    document.getElementById('rulesOverlay').style.display = 'block';
+});
+
+document.getElementById('closeRules').addEventListener('click', function() {
+    document.getElementById('rulesOverlay').style.display = 'none';
 });
