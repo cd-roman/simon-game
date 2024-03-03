@@ -15,10 +15,10 @@ var wrongSound = new Audio("sounds/wrong.mp3");
 
 var level = 0;
 
-var started = false;
+var gameStarted = false;
 
 function fadeLoop() {
-    if (!started) {
+    if (!gameStarted) {
         $('h1').fadeOut(1000, function() {
             $(this).fadeIn(1000, fadeLoop);
         });
@@ -94,19 +94,11 @@ function animatePress(currentColour) {
     }, 100);
 };
 
-function updateAndPlayGameAudio() {
-    var audioElement = $("#myAudio")[0];
-    audioElement.src = "sounds/8-bit-arcade-138828.mp3";  // Set the src of the audio element
-    audioElement.load(); // Recognize the new source
-    // Conditionally play audio based on button state
-    if ($("#toggleAudio").text() === "🔉") {
-        audioElement.play();
-    }
-};
 
-function updateAndPlayIntroAudio() {
+function updateAndPlayAudio() {
     var audioElement = $("#myAudio")[0];
-    audioElement.src = "sounds/kim-lightyear-legends-109307.mp3";  // Set the src of the audio element
+    // Set the src of the audio element based on the 'gameStarted' variable
+    audioElement.src = gameStarted ? "sounds/8-bit-arcade-138828.mp3" : "sounds/kim-lightyear-legends-109307.mp3";
     audioElement.load(); // Recognize the new source
     // Conditionally play audio based on button state
     if ($("#toggleAudio").text() === "🔉") {
@@ -118,9 +110,9 @@ $(document).one("keydown", function(event) {
     nextSequence();
     // Attach the event handler using .on()
     $('div[type="button"]').on("click", buttonClickHandler);
-    started = true;
+    gameStarted = true;
 
-    updateAndPlayGameAudio();
+    updateAndPlayAudio();
 
     // Remove the keydown event handler
     $(document).off("keydown");
@@ -142,7 +134,6 @@ function checkAnswer(index) {
         
         startOver();
 
-
         return;  // Exit the function early if the patterns don't match
     }
 
@@ -162,23 +153,24 @@ function startOver() {
     gamePattern = [];
     userClickedPattern = [];
     count = 0;
-    started = false;
+    gameStarted = false;
 
     $('div[type="button"]').off("click", buttonClickHandler);
 
-    updateAndPlayIntroAudio();
+    updateAndPlayAudio();
 
     $(document).one("keydown", function(event) {
         setTimeout(function() {
             nextSequence();
         }, 100);
         $('div[type="button"]').on("click", buttonClickHandler);
-        updateAndPlayGameAudio();
+        gameStarted = true;
+        updateAndPlayAudio();
     });
 };
 
 $('div[type="button"]').on("click", function(e){
-        if (started === false) {var notInGameChosenColor = e.target.id;
+        if (gameStarted === false) {var notInGameChosenColor = e.target.id;
         animatePress(notInGameChosenColor);
         playSound(notInGameChosenColor);
     }
