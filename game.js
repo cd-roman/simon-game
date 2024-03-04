@@ -1,21 +1,21 @@
-var userClickedPattern = [];
+let userClickedPattern = [];
 
-var gamePattern = [];
+let gamePattern = [];
 
-var buttonColors = ["red", "blue", "green", "yellow"];
+const buttonColors = ["red", "blue", "green", "yellow"];
 
-var sounds = {
+const sounds = {
     green: new Audio("sounds/green.mp3"),
     red: new Audio("sounds/red.mp3"),
     yellow: new Audio("sounds/yellow.mp3"),
     blue: new Audio("sounds/blue.mp3")
 };
 
-var wrongSound = new Audio("sounds/wrong.mp3");
+const wrongSound = new Audio("sounds/wrong.mp3");
 
-var level = 0;
+let level = 0;
 
-var gameStarted = false;
+let gameStarted = false;
 
 function fadeLoop() {
     if (!gameStarted) {
@@ -28,7 +28,7 @@ function fadeLoop() {
 fadeLoop();
 
 $(document).ready(function() {
-    var audioChange = $("#myAudio")[0];
+    const audioChange = $("#myAudio")[0];
     
     $("#toggleAudio").click(function() {
         // Check the current text of the div/button
@@ -45,8 +45,8 @@ $(document).ready(function() {
 function nextSequence() {
 
     setTimeout(function() {
-        var randomNumber = Math.floor(Math.random() * 4);
-        var randomChosenColour = buttonColors[randomNumber];
+        let randomNumber = Math.floor(Math.random() * 4);
+        let randomChosenColour = buttonColors[randomNumber];
         gamePattern.push(randomChosenColour);
         
         // Flash the chosen button
@@ -61,7 +61,7 @@ function nextSequence() {
 };
 
 function flashButton(color) {
-    var element = $("#" + color);
+    let element = $("#" + color);
     element.fadeOut(100, function() {
         element.fadeIn(100);
     });
@@ -76,12 +76,12 @@ function playSound(name) {
 };
 
 function buttonClickHandler(event) {
-    var userChosenColour = event.target.id;
+    let userChosenColour = event.target.id;
     userClickedPattern.push(userChosenColour);
     animatePress(userChosenColour);
     playSound(userChosenColour);
 
-    var lastAnswerIndex = userClickedPattern.length - 1;
+    let lastAnswerIndex = userClickedPattern.length - 1;
     
     checkAnswer(lastAnswerIndex);
 };
@@ -96,7 +96,7 @@ function animatePress(currentColour) {
 
 
 function updateAndPlayAudio() {
-    var audioElement = $("#myAudio")[0];
+    let audioElement = $("#myAudio")[0];
     // Set the src of the audio element based on the 'gameStarted' variable
     audioElement.src = gameStarted ? "sounds/8-bit-arcade-138828.mp3" : "sounds/kim-lightyear-legends-109307.mp3";
     audioElement.load(); // Recognize the new source
@@ -123,7 +123,7 @@ $(document).one("keydown", function(event) {
     $(document).off("keydown");
 });
 
-var count = 0;
+let count = 0;
 
 function checkAnswer(index) {
 
@@ -175,7 +175,7 @@ function startOver() {
 };
 
 $('div[type="button"]').on("click", function(e){
-        if (gameStarted === false) {var notInGameChosenColor = e.target.id;
+        if (gameStarted === false) {let notInGameChosenColor = e.target.id;
         animatePress(notInGameChosenColor);
         playSound(notInGameChosenColor);
     }
