@@ -126,7 +126,11 @@ let count = 0;
 
 function checkAnswer(index) {
   if (userClickedPattern[index] !== gamePattern[index]) {
-    $("h1").text("Game Over, Press Any Key to Restart");
+    $("h1").text(
+      "Game Over, You've reached level " +
+        (level - 1) +
+        "! Press Any Key to Restart"
+    );
     wrongSound.play();
 
     $("body").addClass("game-over");
@@ -134,8 +138,6 @@ function checkAnswer(index) {
     setTimeout(function () {
       $("body").removeClass("game-over");
     }, 200);
-
-    alert("Congrats! You have reached level " + (level - 1));
 
     startOver();
 

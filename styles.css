@@ -4,7 +4,7 @@ body {
 }
 
 h1 {
-  line-height: 1.3;
+  line-height: 1.5;
 }
 
 h2 {
@@ -22,7 +22,7 @@ h2 {
 
 #level-title {
   font-family: 'Press Start 2P', monospace;
-  font-size: 3rem;
+  font-size: 2.5rem;
   margin:  3% 5% 2% 5%;
   color: #FEF2BF;
 }
