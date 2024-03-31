@@ -110,16 +110,18 @@ function updateAndPlayAudio() {
   });
 }
 
-$(document).one("keydown", function (event) {
-  nextSequence();
-  // Attach the event handler using .on()
-  $('div[type="button"]').on("click", buttonClickHandler);
-  gameStarted = true;
+$(document).on("keydown", function (event) {
+  if (event.key === "Enter" || event.keyCode === 13) {
+    // Remove the keydown event handler
+    $(document).off("keydown");
 
-  updateAndPlayAudio();
+    nextSequence();
+    // Attach the event handler using .on()
+    $('div[type="button"]').on("click", buttonClickHandler);
+    gameStarted = true;
 
-  // Remove the keydown event handler
-  $(document).off("keydown");
+    updateAndPlayAudio();
+  }
 });
 
 let count = 0;
@@ -129,7 +131,7 @@ function checkAnswer(index) {
     $("h1").text(
       "Game Over, You've reached level " +
         (level - 1) +
-        "! Press Any Key to Restart"
+        "! Press Enter to Restart"
     );
     wrongSound.play();
 
@@ -166,13 +168,17 @@ function startOver() {
 
   updateAndPlayAudio();
 
-  $(document).one("keydown", function (event) {
-    setTimeout(function () {
-      nextSequence();
-    }, 100);
-    $('div[type="button"]').on("click", buttonClickHandler);
-    gameStarted = true;
-    updateAndPlayAudio();
+  $(document).on("keydown", function (event) {
+    if (event.key === "Enter" || event.keyCode === 13) {
+      $(document).off("keydown");
+
+      setTimeout(function () {
+        nextSequence();
+      }, 100);
+      $('div[type="button"]').on("click", buttonClickHandler);
+      gameStarted = true;
+      updateAndPlayAudio();
+    }
   });
 }
 
