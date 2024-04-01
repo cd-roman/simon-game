@@ -115,6 +115,8 @@ $(document).on("keydown", function (event) {
     // Remove the keydown event handler
     $(document).off("keydown");
 
+    $("#startGame").addClass("hide-element");
+
     nextSequence();
     // Attach the event handler using .on()
     $('div[type="button"]').on("click", buttonClickHandler);
@@ -122,6 +124,22 @@ $(document).on("keydown", function (event) {
 
     updateAndPlayAudio();
   }
+});
+
+$("#startGame").on("click", function () {
+  // Remove the keydown event handler (if it was previously added)
+  $(document).off("keydown");
+
+  nextSequence();
+
+  $("#startGame").addClass("hide-element");
+
+  // Attach the button click handler
+  $('div[type="button"]').on("click", buttonClickHandler);
+
+  gameStarted = true;
+
+  updateAndPlayAudio();
 });
 
 let count = 0;
@@ -136,6 +154,8 @@ function checkAnswer(index) {
     wrongSound.play();
 
     $("body").addClass("game-over");
+
+    $("#startGame").removeClass("hide-element");
 
     setTimeout(function () {
       $("body").removeClass("game-over");
@@ -171,6 +191,8 @@ function startOver() {
   $(document).on("keydown", function (event) {
     if (event.key === "Enter" || event.keyCode === 13) {
       $(document).off("keydown");
+
+      $("#startGame").addClass("hide-element");
 
       setTimeout(function () {
         nextSequence();
