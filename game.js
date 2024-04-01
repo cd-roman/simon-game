@@ -49,8 +49,8 @@ function nextSequence() {
     gamePattern.push(randomChosenColour);
 
     // Flash the chosen button
-    flashButton(randomChosenColour);
     playSound(randomChosenColour);
+    flashButton(randomChosenColour);
 
     $("h1").text("Level " + level);
 
@@ -76,8 +76,8 @@ function playSound(name) {
 function buttonClickHandler(event) {
   let userChosenColour = event.target.id;
   userClickedPattern.push(userChosenColour);
-  animatePress(userChosenColour);
   playSound(userChosenColour);
+  animatePress(userChosenColour);
 
   let lastAnswerIndex = userClickedPattern.length - 1;
 
