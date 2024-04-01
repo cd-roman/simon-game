@@ -11,6 +11,8 @@ const sounds = {
   blue: new Audio("sounds/blue.mp3"),
 };
 
+Object.values(sounds).forEach((sound) => (sound.preload = "auto"));
+
 const wrongSound = new Audio("sounds/wrong.mp3");
 
 let level = 0;
