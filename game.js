@@ -4,7 +4,7 @@ let gamePattern = [];
 
 const buttonColors = ["red", "blue", "green", "yellow"];
 
-var audioContext = new (window.AudioContext || window.webkitAudioContext)();
+const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 
 function unlockAudioContext() {
   if (audioContext.state === "suspended") {
@@ -12,7 +12,6 @@ function unlockAudioContext() {
   }
 }
 
-// Add event listeners to unlock audio context on first user interaction
 ["touchstart", "click"].forEach((event) => {
   document.body.addEventListener(event, unlockAudioContext, false);
 });
@@ -28,7 +27,7 @@ const sounds = {};
 
 // Function to load a sound file
 function loadSound(name, url) {
-  var request = new XMLHttpRequest();
+  const request = new XMLHttpRequest();
   request.open("GET", url, true);
   request.responseType = "arraybuffer";
 
@@ -47,7 +46,6 @@ function loadSound(name, url) {
   request.send();
 }
 
-// Load all sounds
 Object.keys(soundUrls).forEach((name) => {
   loadSound(name, soundUrls[name]);
 });
@@ -108,10 +106,10 @@ function flashButton(color) {
 
 function playSound(name) {
   sounds[name].currentTime = 0;
-  var source = audioContext.createBufferSource(); // creates a sound source
-  source.buffer = sounds[name]; // tell the source which sound to play
-  source.connect(audioContext.destination); // connect the source to the context's destination (the speakers)
-  source.start(0); // play the sound now
+  let source = audioContext.createBufferSource();
+  source.buffer = sounds[name];
+  source.connect(audioContext.destination);
+  source.start(0);
 }
 
 function buttonClickHandler(event) {
