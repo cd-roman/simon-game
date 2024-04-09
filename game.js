@@ -4,14 +4,53 @@ let gamePattern = [];
 
 const buttonColors = ["red", "blue", "green", "yellow"];
 
-const sounds = {
-  green: new Audio("sounds/green.mp3"),
-  red: new Audio("sounds/red.mp3"),
-  yellow: new Audio("sounds/yellow.mp3"),
-  blue: new Audio("sounds/blue.mp3"),
+var audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+function unlockAudioContext() {
+  if (audioContext.state === "suspended") {
+    audioContext.resume();
+  }
+}
+
+// Add event listeners to unlock audio context on first user interaction
+["touchstart", "click"].forEach((event) => {
+  document.body.addEventListener(event, unlockAudioContext, false);
+});
+
+const soundUrls = {
+  green: "sounds/green.mp3",
+  red: "sounds/red.mp3",
+  yellow: "sounds/yellow.mp3",
+  blue: "sounds/blue.mp3",
 };
 
-Object.values(sounds).forEach((sound) => (sound.preload = "auto"));
+const sounds = {};
+
+// Function to load a sound file
+function loadSound(name, url) {
+  var request = new XMLHttpRequest();
+  request.open("GET", url, true);
+  request.responseType = "arraybuffer";
+
+  // Decode asynchronously
+  request.onload = function () {
+    audioContext.decodeAudioData(
+      request.response,
+      function (buffer) {
+        sounds[name] = buffer;
+      },
+      function (error) {
+        console.error("Failed to load sound:", error);
+      }
+    );
+  };
+  request.send();
+}
+
+// Load all sounds
+Object.keys(soundUrls).forEach((name) => {
+  loadSound(name, soundUrls[name]);
+});
 
 const wrongSound = new Audio("sounds/wrong.mp3");
 
@@ -68,11 +107,11 @@ function flashButton(color) {
 }
 
 function playSound(name) {
-  // Reset the audio playback to the start
   sounds[name].currentTime = 0;
-
-  // Play the preloaded audio file
-  sounds[name].play();
+  var source = audioContext.createBufferSource(); // creates a sound source
+  source.buffer = sounds[name]; // tell the source which sound to play
+  source.connect(audioContext.destination); // connect the source to the context's destination (the speakers)
+  source.start(0); // play the sound now
 }
 
 function buttonClickHandler(event) {
