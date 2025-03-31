@@ -258,3 +258,9 @@ document.getElementById("showRules").addEventListener("click", function () {
 document.getElementById("closeRules").addEventListener("click", function () {
   document.getElementById("rulesOverlay").style.display = "none";
 });
+
+document.addEventListener("keydown", function (event) {
+  if (event.key === "Escape") {
+    document.getElementById("rulesOverlay").style.display = "none";
+  }
+});
