@@ -76,8 +76,8 @@ h2 {
   cursor: pointer;
   border: 2px solid black;
   border-radius: 5px;
-  padding: 5px 20px;
-  margin: 40px;
+  padding: 10px 20px;
+  margin: 16px 40px 40px;
 }
 
 .hide-element {
@@ -126,4 +126,49 @@ h2 {
   font-weight: 400;
   margin-bottom: 20px;
   text-align: left;
+}
+
+/* 404 page styles */
+.error-container {
+  min-height: 90vh;
+  display: flex;      
+  flex-direction: column;  
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #FEF2BF;
+}
+
+.error-code {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 3.5rem;
+  color: #FEF2BF;
+}
+
+.error-message {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #FEF2BF;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.back-home-button {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 600;
+  font-size: 1.2rem;
+  cursor: pointer;
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 10px 30px;
+  background-color: #FEF2BF;
+  color: #011F3F;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.back-home-button:hover {
+  background-color: #011F3F;
+  color: #FEF2BF;
+  border-color: #FEF2BF;
 }
