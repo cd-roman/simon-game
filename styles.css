@@ -172,3 +172,43 @@ h2 {
   color: #FEF2BF;
   border-color: #FEF2BF;
 }
+
+/* Responsive styles */
+@media (max-width: 1000px) {
+  .container {
+    width: 80%;
+  }
+
+
+  .btn {
+    width: 150px;
+    height: 150px;
+    margin: 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    width: 90%;
+  }
+
+  .btn {
+    width: 100px;
+    height: 100px;
+    margin: 12px;
+  }
+
+  #level-title {
+    font-size: 2rem;
+  }
+
+  .primary-button {
+    font-size: 1rem;
+    padding: 8px 16px;
+    margin: 16px 20px;
+  }
+
+  .rules-description {
+    font-size: 1rem;
+  }
+}
